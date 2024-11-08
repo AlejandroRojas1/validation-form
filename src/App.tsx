@@ -1,33 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useForm } from "react-hook-form"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {register, handleSubmit} = useForm()
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className="w-full mt-32 flex flex-col justify-center">
+      <h1 className="text-center font-bold text-xl">Formulario para validar</h1>
+      <form className="p-4 flex flex-col gap-y-2 mx-auto my-10 bg-blue-100 rounded" onSubmit={handleSubmit(data=>{console.log(data)})}>
+
+        <label htmlFor="name">nombre: </label>
+        <input className="rounded p-2" placeholder="nombre" id="name" type="text" 
+        {...register("name")}
+        />
+        
+        <label htmlFor="email">email: </label>
+        <input className="rounded p-2" placeholder="email" id="email" type="email" 
+        {...register("email")}/>
+
+        <label htmlFor="password">contraseña: </label>
+        <input className="rounded p-2" placeholder="contraseña" id="password" type="password" 
+        {...register("password")}/>
+
+        <button className="rounded p-2 bg-red-200 mt-4 hover:cursor-pointer font-bold text-gray-500" type="submit" >Enviar</button>
+      </form>
+    </div>
     </>
   )
 }
